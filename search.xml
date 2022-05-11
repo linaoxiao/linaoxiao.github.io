@@ -9,18 +9,6 @@
       </tags>
   </entry>
   <entry>
-    <title>unixbench</title>
-    <url>/2022/05/11/unixbench/</url>
-    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
-<h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压UnixBench工具包：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line">2、进入Unixbench解压后的目录下，编译：</span><br><span class="line"># cd UnixBench</span><br><span class="line"># make clean &amp;&amp; make</span><br><span class="line">3、清除缓存：</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">4、测试单线程和多线程性能，执行命令：</span><br><span class="line"># sudo ./Run -c 1 -c N </span><br><span class="line">其中N代表cpu核数</span><br></pre></td></tr></table></figure>
-
-<h4 id="graphics"><a href="#graphics" class="headerlink" title="graphics"></a>graphics</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压unixbench测试包，并进入文件夹：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line"># cd Unixbench</span><br><span class="line">2、修改Run脚本中第1218行，注释如下内容：</span><br><span class="line"># If it failed, bomb out.</span><br><span class="line">#       if (defined($res-&gt;&#123;&#x27;ERROR&#x27;&#125;)) &#123;</span><br><span class="line">#           my $name = $params-&gt;&#123;&#x27;logmsg&#x27;&#125;;</span><br><span class="line">#           abortRun(&quot;\&quot;$name\&quot;: &quot; . $res-&gt;&#123;&#x27;ERROR&#x27;&#125;);</span><br><span class="line">#       &#125;</span><br><span class="line">3、修改Makefile文件，打开第47行注释，修改为：</span><br><span class="line">GRAPHIC_TESTS = defined</span><br><span class="line">修改第50行为：</span><br><span class="line">GL_LIBS = -lGL -lXext -lX11 -lm</span><br><span class="line">4、在解压后的目录中打开终端执行以下命令，编译、清除缓存然后执行测试：</span><br><span class="line"># make</span><br><span class="line"># export vblank_mode=0</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"># ./Run graphics</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>work</category>
-        <category>性能测试</category>
-      </categories>
-  </entry>
-  <entry>
     <title>性能测试注意事项</title>
     <url>/2022/05/11/daily_test/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="不对啦！" data-whm="不对不对！">
@@ -182,6 +170,18 @@
 
 <h4 id="开透明大页的影响"><a href="#开透明大页的影响" class="headerlink" title="开透明大页的影响"></a>开透明大页的影响</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改透明大页配置 TRANSPARENT_HUGEPAGE_ALWAYS=y，stream单项会有提升，但是stream满线会下降，只能二选一，只要不必UOS低就行。</span><br><span class="line">需要多次测试取区间作对比。</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>work</category>
+        <category>性能测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>unixbench</title>
+    <url>/2022/05/11/unixbench/</url>
+    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
+<h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压UnixBench工具包：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line">2、进入Unixbench解压后的目录下，编译：</span><br><span class="line"># cd UnixBench</span><br><span class="line"># make clean &amp;&amp; make</span><br><span class="line">3、清除缓存：</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">4、测试单线程和多线程性能，执行命令：</span><br><span class="line"># sudo ./Run -c 1 -c N </span><br><span class="line">其中N代表cpu核数</span><br></pre></td></tr></table></figure>
+
+<h4 id="graphics"><a href="#graphics" class="headerlink" title="graphics"></a>graphics</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压unixbench测试包，并进入文件夹：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line"># cd Unixbench</span><br><span class="line">2、修改Run脚本中第1218行，注释如下内容：</span><br><span class="line"># If it failed, bomb out.</span><br><span class="line">#       if (defined($res-&gt;&#123;&#x27;ERROR&#x27;&#125;)) &#123;</span><br><span class="line">#           my $name = $params-&gt;&#123;&#x27;logmsg&#x27;&#125;;</span><br><span class="line">#           abortRun(&quot;\&quot;$name\&quot;: &quot; . $res-&gt;&#123;&#x27;ERROR&#x27;&#125;);</span><br><span class="line">#       &#125;</span><br><span class="line">3、修改Makefile文件，打开第47行注释，修改为：</span><br><span class="line">GRAPHIC_TESTS = defined</span><br><span class="line">修改第50行为：</span><br><span class="line">GL_LIBS = -lGL -lXext -lX11 -lm</span><br><span class="line">4、在解压后的目录中打开终端执行以下命令，编译、清除缓存然后执行测试：</span><br><span class="line"># make</span><br><span class="line"># export vblank_mode=0</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"># ./Run graphics</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>work</category>
         <category>性能测试</category>
