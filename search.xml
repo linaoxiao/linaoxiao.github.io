@@ -9,69 +9,6 @@
       </tags>
   </entry>
   <entry>
-    <title>speccpu</title>
-    <url>/2022/05/11/speccpu/</url>
-    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开终端，安装依赖包：apt-get install gcc g++ gfortran</span><br><span class="line">2.解压缩speccpu2006测试工具包，并附执行权限</span><br><span class="line"># tar xvf speccpu2006-v1.0.1-newest.tar -C /home</span><br><span class="line"># chmod -R a+x /home/speccpu2006-v1.0.1</span><br><span class="line">3.修改./tools/src/make-3.80/glob/glob.c文件54行”==”为“&gt;=”</span><br><span class="line">4.在./tools/src/buildtools文件312行上一行添加“export PERLFLAGS=&quot;-A libs=-lm -A libs=-ldl&quot;”</span><br><span class="line">5.安装speccpu2006：</span><br><span class="line">arm和x86架构执行：</span><br><span class="line"># ./install.sh    //在弹出的提示信息中，选择yes回车</span><br><span class="line">mips架构执行：</span><br><span class="line"># mv ./tools/src/buildtools ./tools/src/buildtools.bak</span><br><span class="line"># mv ./tools/src/buildtools.mips.bak ./tools/src/buildtools</span><br><span class="line"># ./install.sh    //在弹出的提示信息中，选择yes回车</span><br><span class="line">3A5000架构执行：</span><br><span class="line"># cp -r loongarch64-linux /home/speccpu2006-v1.0.1/tools/bin</span><br><span class="line"># cp loongarch-fix.cfg /home/speccpu2006-v1.0.1/config</span><br><span class="line"># ./install.sh    //在弹出的提示信息中，选择yes回车</span><br><span class="line">加载环境变量：</span><br><span class="line">#. ./shrc</span><br><span class="line">6.检查SPEC CPU2006是否安装成功</span><br><span class="line"># runspec -V</span><br><span class="line">7.选择相应配置文件进行测试：</span><br><span class="line">arm平台：</span><br><span class="line"># runspec –c arm64.cfg -n 1 all</span><br><span class="line"># runspec –c arm64.cfg -r N -n 1 all    //N和CPU核数一致，根据机器的核数去指定多线程N值；-n 指定测试轮数;all代表浮点和整型参数都测试</span><br><span class="line">x86_64平台：</span><br><span class="line"># runspec –c x86.cfg -n 1 all</span><br><span class="line"># runspec –c x86.cfg -r N -n 1 all        </span><br><span class="line">mips平台：</span><br><span class="line"># runspec -c mips.cfg -n 1 all</span><br><span class="line"># runspec -c mips.cfg -r N -n 1 all</span><br><span class="line">3A5000平台：</span><br><span class="line"># runspec -c loongarch-fix.cfg -n 1 all</span><br><span class="line">#runspec -c loongarch-fix.cfg -r N -n 1 all</span><br></pre></td></tr></table></figure>
-
-<h3 id="单跑某一项"><a href="#单跑某一项" class="headerlink" title="单跑某一项"></a>单跑某一项</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># runspec –c x86.cfg –iterations=1 –noreportable 435.gromacs</span><br></pre></td></tr></table></figure>
-
-<h3 id="运行前需更改测试路径"><a href="#运行前需更改测试路径" class="headerlink" title="运行前需更改测试路径"></a>运行前需更改测试路径</h3><p><code>/home目录改为/data</code></p>
-]]></content>
-      <categories>
-        <category>work</category>
-        <category>性能测试</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>稳定性测试注意事项</title>
-    <url>/2022/05/11/stability_test/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="不对啦！" data-whm="不对不对！">
-  <script id="hbeData" type="hbeData" data-hmacdigest="6bd93cc8ba402c1f5d22d7a588148c114c16367f1f0ea7346c310dc6c2586a9c">e4983c46c33fe812766bcc317c679c6eb6c46d260c9e18aa1ccd93603cf74186be61a621b494c28fd3c142ed2cb36f6b5150a73f18543319cab7071e1f472ea6adfa83fe8bd5fdc04b74f2a0ba9c4fe98d8507f20e5900706837582e4d499e108ee329444997f419172be2df54c08f329138e719b310d551992a773c94d9abaa355d7ba59b83e4b6819ce7dbc6d681be9896c54017562c48bc68a80cc50580858f25fc961672a7b075e73ebc3a37acad2fb0147ac8180eb496f923bb6057dbe7bf251a2a2b6fee708c590e95846a33ca388efbca16747628b142452038279ab1190a4fc10be4309f1569238c64ea5987b014513f9f0ef548c03ecdcd181874f7449a90a0ba715cb57e74b58f17f48f5817187021fca9c130cf1d0dba83b1dbe1221dca02ef1f7c2b201b691934fc576c4413c8e2044defb94da9bfcf3ed15a518fd36d24b0bce99a63f65efab32ecb9211a34f33ea9032ee304a773c0d3f8cc7e051d750ea6958a4e50fa15a1b4d57cb7568efdeac14df03fcfbb88c1df4b191cadae021d06ec5a31c43b7e0f655eb08f5943c0fd2f52848780241f6b6d723760e9f97db51843b62a839365a4860ebbee80e325f8bafe07338e67c6cd4b9832bd2ca6b48bd55a549daab851c3b4185982a673f6d41ed7f4e2fefcc03471d3104fc1c1a6a9447d957958271ce5d4241432f80a69ee92fdffabe559a892732942192eeb3357606141f28982c22ab784ebc4bcd3fc018b2a8f91c94b15737c102481731fefcabea72eef34d068df30ab6c24552cd196015934dd74b2d2281a2f3b643b96a076f20afb0349a2872232c23345fa318fd26c4ca3ad6519f05cc9c22651f5d60fdc1fbac06f7027a2d49858244c1404cec62e69d2549b2c053352e5087d5068cd440e2f4a98c6604a132e2a22bbb615d6d735a2732b2977b118debac1787bc6abcece840b0704cc3b72a57becc6f172d0cb9fbad6a2ee9c6d6f166f2070f4e1659bb3a8d04aeb20a8418a23e8ab03725a7e9a5ca67a7759f1b74134441ab641ce674e22fd65cfac69668a5c26905082d9fd4216dd7a05969b9b3efe7c31483b1756683ac6b7e987f022e0960368405722ca6aa02556f809b9674968bc63d6c41afeb6e38f0a78d02be45ccfd81dd9222abc2f831a487c5ecafc2ac1c20b2ba1edb9b2b3ea3f4fbd86a0ac9df196740f85f9d260c889756de9f47cabaf2997b2cbec422c2f6c3de2ac551d2423b61dfba17ccc952062aba28d848a6006f3caeb974cf0faa9b1651fd9fda91b1f6e500575177e50d009eb22a98b5a18c85b05d2a777bf0890b65793356c7f5d8ee41303a9fa9712ad2da87f1eaf5ef65196c7c8fde2eee340be5ce33d6681a8d081578fa86ebd067b9386427a1b6f380669f33b00f52bf9228f1af076868c79d66cc1af37ff524385831b4a7179c73035e37de7669516fc7091e75bb9f52167b22d02a0478364857b74f3c37890c6d19cf63f4230a1d7be9772e0fb368b84005c2db5dcb077ae0bec49cbe51943498ea6f83ef6b4b52ee235e9aa678d6acaf0d5249b8271cc452d5093dcc234108e2738a0a2fb490270d647333571bd05ab409292e722e4d1e62e6d65fdbc95811aab1bbf75c4c5a414402afd31cec67dda0f959ab85fa1aadd82fd006b6637806cfab772c8625d656ebbb164d95aa2c5794746f9d9ef45ec6aeb7646ae113aca73b9361bfc071d640fd4980a6e9744e51e47125a4489008d028d1ce1dc372df7ada6b9ca02a9e585b60ec1abe52afe5988cca43208a28b890f45c8a030db7b26106fd76bd549664ace31c327a2a477620f1d28f43785cd81d18312c6be2c2b8ba998f981eac36dcd24e853ad367fca311db592b7f393a191e9c68a542c47e7cdbde441a4d2c80dac492e77513a17da6caa9c87daceb92ec5136923d84ef1681c60839291030e7778b92faae73b88121387d9d16953fb85994cedc08e0fe59a8b2c9c5dda781ed7c3dd231b6388e50d598d3bd6098bb478858753b6a572aa1ec3e7aa499f98cc4f9f319aba0e3ba92d615c2f42c6ef7ef048fa84a2afc8a31290245c41d47c5c305fbf3105ba9cf907cc0d14b1907126258a631ffeae10315577260e9abb1d932ca332419ff08ccb93fa757d5c62d950671ae0c1e7bdb814a733c7de35c5443c7a8705c682a7b77d1e6edb7c8e6a47f1881246a13666af88244366b4d3cbe564639c7c9667901c9228329ec483bde88462ecc3802505715498c452f09e4015e0b690402aa1ef9980e239d13772eec1b9184378103e72aad86a0466609ae0ba85ecf36a622654f9c334653bb0bd87db815e2c14335e0bc330cccfffdb78200c0f561b8aa912cd126af0404d81f7fa31c667e331fec75695637fe9ea4f54cd0b9008de3f55eb32b42cdc1620e5c7c4c7420fbea4625f7dda12d5de605c1997e10a91821619397055d74504424d6af5344b3b6e268cca44e7643c2fc8a576618d7521c6f4a2ea310c04bd28efaf15d8fb616ca63f46d457ae8525d9bbf3afc4ea1fbc81b6fba00e0ac435353719a1563b938934292928ca813b20f9feac4a66f60e5c7baa3489c31fae14baede2655</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-up">
-      <input class="hbe hbe-input-field hbe-input-field-up" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-up" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-up">暗号对了才可以看哦~</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>work</category>
-        <category>稳定性测试</category>
-      </categories>
-      <tags>
-        <tag>work_srt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>stream</title>
-    <url>/2022/05/11/stream/</url>
-    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压stream工具包：</span><br><span class="line"># tar xvf stream-5.9-1.tar.bz2</span><br><span class="line">2、进入到解压目录执行编译：</span><br><span class="line"># cd stream-5.9-1</span><br><span class="line"># make clean</span><br><span class="line"># make SET=TRUE N=80000000 NTIMES=100</span><br><span class="line">3、清除缓存：</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">4、测试单线程和多线程测试：</span><br><span class="line"># ./Run.sh -n 1 -n N</span><br><span class="line">// 若CPU核数为4，则N为4</span><br></pre></td></tr></table></figure>
-
-<h4 id="开透明大页的影响"><a href="#开透明大页的影响" class="headerlink" title="开透明大页的影响"></a>开透明大页的影响</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改透明大页配置 TRANSPARENT_HUGEPAGE_ALWAYS=y，stream单项会有提升，但是stream满线会下降，只能二选一，只要不必UOS低就行。</span><br><span class="line">需要多次测试取区间作对比。</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>work</category>
-        <category>性能测试</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>unixbench</title>
-    <url>/2022/05/11/unixbench/</url>
-    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
-<h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压UnixBench工具包：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line">2、进入Unixbench解压后的目录下，编译：</span><br><span class="line"># cd UnixBench</span><br><span class="line"># make clean &amp;&amp; make</span><br><span class="line">3、清除缓存：</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">4、测试单线程和多线程性能，执行命令：</span><br><span class="line"># sudo ./Run -c 1 -c N </span><br><span class="line">其中N代表cpu核数</span><br></pre></td></tr></table></figure>
-
-<h4 id="graphics"><a href="#graphics" class="headerlink" title="graphics"></a>graphics</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压unixbench测试包，并进入文件夹：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line"># cd Unixbench</span><br><span class="line">2、修改Run脚本中第1218行，注释如下内容：</span><br><span class="line"># If it failed, bomb out.</span><br><span class="line">#       if (defined($res-&gt;&#123;&#x27;ERROR&#x27;&#125;)) &#123;</span><br><span class="line">#           my $name = $params-&gt;&#123;&#x27;logmsg&#x27;&#125;;</span><br><span class="line">#           abortRun(&quot;\&quot;$name\&quot;: &quot; . $res-&gt;&#123;&#x27;ERROR&#x27;&#125;);</span><br><span class="line">#       &#125;</span><br><span class="line">3、修改Makefile文件，打开第47行注释，修改为：</span><br><span class="line">GRAPHIC_TESTS = defined</span><br><span class="line">修改第50行为：</span><br><span class="line">GL_LIBS = -lGL -lXext -lX11 -lm</span><br><span class="line">4、在解压后的目录中打开终端执行以下命令，编译、清除缓存然后执行测试：</span><br><span class="line"># make</span><br><span class="line"># export vblank_mode=0</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"># ./Run graphics</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>work</category>
-        <category>性能测试</category>
-      </categories>
-  </entry>
-  <entry>
     <title>性能测试注意事项</title>
     <url>/2022/05/11/daily_test/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="不对啦！" data-whm="不对不对！">
@@ -182,6 +119,69 @@
 <h3 id="attention！"><a href="#attention！" class="headerlink" title="attention！"></a>attention！</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、测试的内存，默认2/3，超过16g的固定测的10g</span><br><span class="line">2、换核需要make clean一下</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">若没有结果且为3a5000架构，看以下两条命令结果是否一致：</span><br><span class="line">$ arch</span><br><span class="line">$ uname -i</span><br><span class="line">然后修改脚本</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>work</category>
+        <category>性能测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>speccpu</title>
+    <url>/2022/05/11/speccpu/</url>
+    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 打开终端，安装依赖包：apt-get install gcc g++ gfortran</span><br><span class="line">2.解压缩speccpu2006测试工具包，并附执行权限</span><br><span class="line"># tar xvf speccpu2006-v1.0.1-newest.tar -C /home</span><br><span class="line"># chmod -R a+x /home/speccpu2006-v1.0.1</span><br><span class="line">3.修改./tools/src/make-3.80/glob/glob.c文件54行”==”为“&gt;=”</span><br><span class="line">4.在./tools/src/buildtools文件312行上一行添加“export PERLFLAGS=&quot;-A libs=-lm -A libs=-ldl&quot;”</span><br><span class="line">5.安装speccpu2006：</span><br><span class="line">arm和x86架构执行：</span><br><span class="line"># ./install.sh    //在弹出的提示信息中，选择yes回车</span><br><span class="line">mips架构执行：</span><br><span class="line"># mv ./tools/src/buildtools ./tools/src/buildtools.bak</span><br><span class="line"># mv ./tools/src/buildtools.mips.bak ./tools/src/buildtools</span><br><span class="line"># ./install.sh    //在弹出的提示信息中，选择yes回车</span><br><span class="line">3A5000架构执行：</span><br><span class="line"># cp -r loongarch64-linux /home/speccpu2006-v1.0.1/tools/bin</span><br><span class="line"># cp loongarch-fix.cfg /home/speccpu2006-v1.0.1/config</span><br><span class="line"># ./install.sh    //在弹出的提示信息中，选择yes回车</span><br><span class="line">加载环境变量：</span><br><span class="line">#. ./shrc</span><br><span class="line">6.检查SPEC CPU2006是否安装成功</span><br><span class="line"># runspec -V</span><br><span class="line">7.选择相应配置文件进行测试：</span><br><span class="line">arm平台：</span><br><span class="line"># runspec –c arm64.cfg -n 1 all</span><br><span class="line"># runspec –c arm64.cfg -r N -n 1 all    //N和CPU核数一致，根据机器的核数去指定多线程N值；-n 指定测试轮数;all代表浮点和整型参数都测试</span><br><span class="line">x86_64平台：</span><br><span class="line"># runspec –c x86.cfg -n 1 all</span><br><span class="line"># runspec –c x86.cfg -r N -n 1 all        </span><br><span class="line">mips平台：</span><br><span class="line"># runspec -c mips.cfg -n 1 all</span><br><span class="line"># runspec -c mips.cfg -r N -n 1 all</span><br><span class="line">3A5000平台：</span><br><span class="line"># runspec -c loongarch-fix.cfg -n 1 all</span><br><span class="line">#runspec -c loongarch-fix.cfg -r N -n 1 all</span><br></pre></td></tr></table></figure>
+
+<h3 id="单跑某一项"><a href="#单跑某一项" class="headerlink" title="单跑某一项"></a>单跑某一项</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># runspec –c x86.cfg –iterations=1 –noreportable 435.gromacs</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行前需更改测试路径"><a href="#运行前需更改测试路径" class="headerlink" title="运行前需更改测试路径"></a>运行前需更改测试路径</h3><p><code>/home目录改为/data</code></p>
+]]></content>
+      <categories>
+        <category>work</category>
+        <category>性能测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>稳定性测试注意事项</title>
+    <url>/2022/05/11/stability_test/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="不对啦！" data-whm="不对不对！">
+  <script id="hbeData" type="hbeData" data-hmacdigest="6bd93cc8ba402c1f5d22d7a588148c114c16367f1f0ea7346c310dc6c2586a9c">e4983c46c33fe812766bcc317c679c6eb6c46d260c9e18aa1ccd93603cf74186be61a621b494c28fd3c142ed2cb36f6b5150a73f18543319cab7071e1f472ea6adfa83fe8bd5fdc04b74f2a0ba9c4fe98d8507f20e5900706837582e4d499e108ee329444997f419172be2df54c08f329138e719b310d551992a773c94d9abaa355d7ba59b83e4b6819ce7dbc6d681be9896c54017562c48bc68a80cc50580858f25fc961672a7b075e73ebc3a37acad2fb0147ac8180eb496f923bb6057dbe7bf251a2a2b6fee708c590e95846a33ca388efbca16747628b142452038279ab1190a4fc10be4309f1569238c64ea5987b014513f9f0ef548c03ecdcd181874f7449a90a0ba715cb57e74b58f17f48f5817187021fca9c130cf1d0dba83b1dbe1221dca02ef1f7c2b201b691934fc576c4413c8e2044defb94da9bfcf3ed15a518fd36d24b0bce99a63f65efab32ecb9211a34f33ea9032ee304a773c0d3f8cc7e051d750ea6958a4e50fa15a1b4d57cb7568efdeac14df03fcfbb88c1df4b191cadae021d06ec5a31c43b7e0f655eb08f5943c0fd2f52848780241f6b6d723760e9f97db51843b62a839365a4860ebbee80e325f8bafe07338e67c6cd4b9832bd2ca6b48bd55a549daab851c3b4185982a673f6d41ed7f4e2fefcc03471d3104fc1c1a6a9447d957958271ce5d4241432f80a69ee92fdffabe559a892732942192eeb3357606141f28982c22ab784ebc4bcd3fc018b2a8f91c94b15737c102481731fefcabea72eef34d068df30ab6c24552cd196015934dd74b2d2281a2f3b643b96a076f20afb0349a2872232c23345fa318fd26c4ca3ad6519f05cc9c22651f5d60fdc1fbac06f7027a2d49858244c1404cec62e69d2549b2c053352e5087d5068cd440e2f4a98c6604a132e2a22bbb615d6d735a2732b2977b118debac1787bc6abcece840b0704cc3b72a57becc6f172d0cb9fbad6a2ee9c6d6f166f2070f4e1659bb3a8d04aeb20a8418a23e8ab03725a7e9a5ca67a7759f1b74134441ab641ce674e22fd65cfac69668a5c26905082d9fd4216dd7a05969b9b3efe7c31483b1756683ac6b7e987f022e0960368405722ca6aa02556f809b9674968bc63d6c41afeb6e38f0a78d02be45ccfd81dd9222abc2f831a487c5ecafc2ac1c20b2ba1edb9b2b3ea3f4fbd86a0ac9df196740f85f9d260c889756de9f47cabaf2997b2cbec422c2f6c3de2ac551d2423b61dfba17ccc952062aba28d848a6006f3caeb974cf0faa9b1651fd9fda91b1f6e500575177e50d009eb22a98b5a18c85b05d2a777bf0890b65793356c7f5d8ee41303a9fa9712ad2da87f1eaf5ef65196c7c8fde2eee340be5ce33d6681a8d081578fa86ebd067b9386427a1b6f380669f33b00f52bf9228f1af076868c79d66cc1af37ff524385831b4a7179c73035e37de7669516fc7091e75bb9f52167b22d02a0478364857b74f3c37890c6d19cf63f4230a1d7be9772e0fb368b84005c2db5dcb077ae0bec49cbe51943498ea6f83ef6b4b52ee235e9aa678d6acaf0d5249b8271cc452d5093dcc234108e2738a0a2fb490270d647333571bd05ab409292e722e4d1e62e6d65fdbc95811aab1bbf75c4c5a414402afd31cec67dda0f959ab85fa1aadd82fd006b6637806cfab772c8625d656ebbb164d95aa2c5794746f9d9ef45ec6aeb7646ae113aca73b9361bfc071d640fd4980a6e9744e51e47125a4489008d028d1ce1dc372df7ada6b9ca02a9e585b60ec1abe52afe5988cca43208a28b890f45c8a030db7b26106fd76bd549664ace31c327a2a477620f1d28f43785cd81d18312c6be2c2b8ba998f981eac36dcd24e853ad367fca311db592b7f393a191e9c68a542c47e7cdbde441a4d2c80dac492e77513a17da6caa9c87daceb92ec5136923d84ef1681c60839291030e7778b92faae73b88121387d9d16953fb85994cedc08e0fe59a8b2c9c5dda781ed7c3dd231b6388e50d598d3bd6098bb478858753b6a572aa1ec3e7aa499f98cc4f9f319aba0e3ba92d615c2f42c6ef7ef048fa84a2afc8a31290245c41d47c5c305fbf3105ba9cf907cc0d14b1907126258a631ffeae10315577260e9abb1d932ca332419ff08ccb93fa757d5c62d950671ae0c1e7bdb814a733c7de35c5443c7a8705c682a7b77d1e6edb7c8e6a47f1881246a13666af88244366b4d3cbe564639c7c9667901c9228329ec483bde88462ecc3802505715498c452f09e4015e0b690402aa1ef9980e239d13772eec1b9184378103e72aad86a0466609ae0ba85ecf36a622654f9c334653bb0bd87db815e2c14335e0bc330cccfffdb78200c0f561b8aa912cd126af0404d81f7fa31c667e331fec75695637fe9ea4f54cd0b9008de3f55eb32b42cdc1620e5c7c4c7420fbea4625f7dda12d5de605c1997e10a91821619397055d74504424d6af5344b3b6e268cca44e7643c2fc8a576618d7521c6f4a2ea310c04bd28efaf15d8fb616ca63f46d457ae8525d9bbf3afc4ea1fbc81b6fba00e0ac435353719a1563b938934292928ca813b20f9feac4a66f60e5c7baa3489c31fae14baede2655</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-up">
+      <input class="hbe hbe-input-field hbe-input-field-up" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-up" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-up">暗号对了才可以看哦~</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>work</category>
+        <category>稳定性测试</category>
+      </categories>
+      <tags>
+        <tag>work_srt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>stream</title>
+    <url>/2022/05/11/stream/</url>
+    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压stream工具包：</span><br><span class="line"># tar xvf stream-5.9-1.tar.bz2</span><br><span class="line">2、进入到解压目录执行编译：</span><br><span class="line"># cd stream-5.9-1</span><br><span class="line"># make clean</span><br><span class="line"># make SET=TRUE N=80000000 NTIMES=100</span><br><span class="line">3、清除缓存：</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">4、测试单线程和多线程测试：</span><br><span class="line"># ./Run.sh -n 1 -n N</span><br><span class="line">// 若CPU核数为4，则N为4</span><br></pre></td></tr></table></figure>
+
+<h4 id="开透明大页的影响"><a href="#开透明大页的影响" class="headerlink" title="开透明大页的影响"></a>开透明大页的影响</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改透明大页配置 TRANSPARENT_HUGEPAGE_ALWAYS=y，stream单项会有提升，但是stream满线会下降，只能二选一，只要不必UOS低就行。</span><br><span class="line">需要多次测试取区间作对比。</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>work</category>
+        <category>性能测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>unixbench</title>
+    <url>/2022/05/11/unixbench/</url>
+    <content><![CDATA[<h3 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h3><span id="more"></span>
+<h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压UnixBench工具包：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line">2、进入Unixbench解压后的目录下，编译：</span><br><span class="line"># cd UnixBench</span><br><span class="line"># make clean &amp;&amp; make</span><br><span class="line">3、清除缓存：</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">4、测试单线程和多线程性能，执行命令：</span><br><span class="line"># sudo ./Run -c 1 -c N </span><br><span class="line">其中N代表cpu核数</span><br></pre></td></tr></table></figure>
+
+<h4 id="graphics"><a href="#graphics" class="headerlink" title="graphics"></a>graphics</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、解压unixbench测试包，并进入文件夹：</span><br><span class="line"># tar xvf unixbench5.1.3-new.tar</span><br><span class="line"># cd Unixbench</span><br><span class="line">2、修改Run脚本中第1218行，注释如下内容：</span><br><span class="line"># If it failed, bomb out.</span><br><span class="line">#       if (defined($res-&gt;&#123;&#x27;ERROR&#x27;&#125;)) &#123;</span><br><span class="line">#           my $name = $params-&gt;&#123;&#x27;logmsg&#x27;&#125;;</span><br><span class="line">#           abortRun(&quot;\&quot;$name\&quot;: &quot; . $res-&gt;&#123;&#x27;ERROR&#x27;&#125;);</span><br><span class="line">#       &#125;</span><br><span class="line">3、修改Makefile文件，打开第47行注释，修改为：</span><br><span class="line">GRAPHIC_TESTS = defined</span><br><span class="line">修改第50行为：</span><br><span class="line">GL_LIBS = -lGL -lXext -lX11 -lm</span><br><span class="line">4、在解压后的目录中打开终端执行以下命令，编译、清除缓存然后执行测试：</span><br><span class="line"># make</span><br><span class="line"># export vblank_mode=0</span><br><span class="line"># sync</span><br><span class="line"># echo 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"># ./Run graphics</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>work</category>
         <category>性能测试</category>
