@@ -104,7 +104,9 @@
 
 <h4 id="修改预读"><a href="#修改预读" class="headerlink" title="修改预读"></a>修改预读</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 4069 &gt; /sys/block/sd**/queue/read_ahead_kb </span><br><span class="line">sd** 换成要测的盘</span><br></pre></td></tr></table></figure>
 
-<h4 id="修改bfq空闭"><a href="#修改bfq空闭" class="headerlink" title="修改bfq空闭"></a>修改bfq空闭</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 0 &gt; /sys/block/sd**/queue/iosched/slice_idle</span><br><span class="line">sd** 换成要测的盘</span><br></pre></td></tr></table></figure>]]></content>
+<h4 id="修改bfq空闭"><a href="#修改bfq空闭" class="headerlink" title="修改bfq空闭"></a>修改bfq空闭</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># echo 0 &gt; /sys/block/sd**/queue/iosched/slice_idle</span><br><span class="line">sd** 换成要测的盘</span><br></pre></td></tr></table></figure>
+
+<h4 id="一些报错"><a href="#一些报错" class="headerlink" title="一些报错"></a>一些报错</h4><h5 id="当前设备-x2F-目录下可用空间不足16，测试中止"><a href="#当前设备-x2F-目录下可用空间不足16，测试中止" class="headerlink" title="当前设备&#x2F;目录下可用空间不足16，测试中止"></a>当前设备&#x2F;目录下可用空间不足16，测试中止</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">修改test_opt.h脚本：</span><br><span class="line">function iozone_opt() &#123;</span><br><span class="line">    IOZONE_VERSION=&quot;iozone3_430.tar&quot;</span><br><span class="line">    IOZONE_TESTPATH=&quot;/&quot;</span><br><span class="line">    IOZONE_TESTNUM=8</span><br><span class="line">    IOZONE_TEST_R=&quot;16M&quot;</span><br><span class="line">    IOZONE_TEST_S=&quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>work</category>
         <category>性能测试</category>
