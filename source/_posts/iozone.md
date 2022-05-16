@@ -71,6 +71,7 @@ sd** 换成要测的盘
 #### 一些报错
 ##### 当前设备/目录下可用空间不足16，测试中止
 ```
+方法一：
 修改test_opt.h脚本：
 function iozone_opt() {
     IOZONE_VERSION="iozone3_430.tar"
@@ -79,4 +80,7 @@ function iozone_opt() {
     IOZONE_TEST_R="16M"
     IOZONE_TEST_S=""
 }
+
+方法二：
+更换至/data目录下
 ```
