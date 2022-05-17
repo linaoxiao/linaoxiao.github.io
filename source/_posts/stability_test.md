@@ -32,3 +32,12 @@ loogarch64) ./configure --build=mips --with-realtime-testsuite --with-open-posix
 ```
 reboot后删除/otp/ltp
 ```
+#### 设置优先级范围以及改变优先级调度策略
+```
+终端执行如下命令：
+$ cd /opt/ltp/testcases/bin/
+$ ./sched_setparam01-05 //设置优先级范围
+$ ./sched_setscheduler01-03 //改变优先级调度策略
+sched_setparam()系统调用才能改变进程的静态优先级。
+sched_setscheduler()函数将pid所指定进程的调度策略和调度参数分别设置为param指向的sched_param结构中指定的policy和参数。
+```
