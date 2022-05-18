@@ -8,6 +8,8 @@ categories:
 ### 测试方法
 <!--more-->
 ```
+预置条件：系统的根分区空闲空间大于两倍内存；
+测试步骤：
 1、解压iozone工具包：
 # tar xvf iozone3_430.tar
 2、进入到解压目录编译工具：
@@ -30,10 +32,26 @@ x86架构执行： # make linux-AMD64
 // 命令中假设机器内存为 8G，测试时请根据实际情况修改-s 参数。
 ```
 
-### 调优
+### 一些优化
 #### vm.dirty_ratio 
 ```
 vm.dirty_ratio用于调节脏数据刷新率，即脏数据达到百分之几的时候回写，即理论上调高此值，写性能提高
+```
+
+#### 更改预置条件
+```
+1、系统的根分区空闲空间大于两倍内存；
+2、准备iozone测试工具包；
+3、优化：
+（1）设置sys vm参数：
+# sudo su
+# sysctl -w vm.dirty_background_ratio=35
+# sysctl -w vm.dirty_ratio=80
+# sysctl -a |grep vm.d查看是否生效
+（2）修改预读；
+# echo 4096 > /sys/block/sd**/queue/read_ahead_kb
+（3）修改bfq空闲
+# echo 0 > /sys/block/sd**/queue/iosched/slice_idle
 ```
 
 ### Attention！

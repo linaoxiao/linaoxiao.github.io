@@ -27,9 +27,22 @@ $ gsettings set org.ukui.power-manager power-policy-ac 0
 
 ### 确认是否设置成功：
 ``` 
-$ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
+$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor 
 // 确认是否为performance
 // 例如八核，检查所有cpu0~7设置是否成功
+```
+
+### 硬件环境
+#### USB
+```
+测试USB传输相关性能时，未明确要求时尽量使用USB3.0口（usb3.0有9pin，通常为蓝色，标志带有“SS”）；明确要求USB3.0时，不要插入USB2.0口进行测试。
+```
+#### 网络
+```
+测试网络相关性能时，请检查使用的网口速度是否正确。方法：
+（1）ifconfig确认网口名称；
+（2）ethtool xx|grep Speed，其中xx代表网口名。
+若插的千兆，则Speed应为“1000Mb/s”，如果不是请排查问题并重新连接后再测试。
 ```
 
 ### 设置显示器为常亮
@@ -94,4 +107,14 @@ minicom配置好了，minicom还有很多妙用，执行命令sudo minicom -C fi
 首先终端输入sudo ls  /proc/tty/driver/
 查看通过那个端口输出，一般的话ARM架构里面有ttyAMA，Mips架构和X86架构里面只有serial。因此默认Arm架构为ttyAMA0输出。Mips和X86架构为ttyS0。
 （具体看文档 https://docs.qq.com/doc/DTUJhYXJldmJJRFB6）
+```
+
+### 蓝牙传输文件
+#### 查看传输速率
+```
+$ obexctl
+```
+#### 查看服务是否存在
+```
+$ ps -aux ｜ grep bluetoothService
 ```

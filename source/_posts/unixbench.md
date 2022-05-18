@@ -44,3 +44,55 @@ GL_LIBS = -lGL -lXext -lX11 -lm
 # echo 3 > /proc/sys/vm/drop_caches
 # ./Run graphics
 ```
+
+### 一些优化
+#### 挂载到内存
+```
+解压前执行：
+# sudo mkdir -p /home/Ub
+# sudo mount -t tmpfs -o size=4096M tmpfs /home/Ub
+
+较默认方法预计提升：单线10%左右，多线20%左右。
+```
+
+#### 修改编译参数
+```
+解压后进入Unixbench目录：
+修改Makefile文件74行，将“OPTON = -O2 -fomit-frame-pointer -fforce-addr -ffast-math -Wall”改为“OPTON = -O3 -fomit-frame-pointer -fforce-addr -ffast-math -Wall -static -flto”
+然后编译
+
+较默认方法预计提升：单线15%~20%左右，多线15%~20%左右。
+```
+
+#### 修改运行参数
+```
+解压后进入Unixbench目录：
+修改Run文件251行syscall项的option，将“"options" => "10",”改为“"options" => "10 getpid",”
+然后编译
+
+较默认方法预计提升：单线20%左右，多线20%左右。
+```
+
+#### 安装优化包
+```
+安装优化包（需额外申请）：kylin-perf-utils_1.3.2-1-20_arm64/x86.deb
+
+较默认方法预计提升：单线40%左右，多线55%左右。
+```
+
+#### 挂载到内存 & 修改编译参数
+```
+较默认方法预计提升：单线25%~35%左右，多线35%~50%左右。
+```
+
+#### 挂载到内存 & 修改编译参数 & 修改运行参数
+```
+较默认方法预计提升：单线55%左右，多线65%~80%左右。
+```
+
+#### 挂载到内存 & 修改编译参数 & 修改运行参数 & 优化包
+```
+较默认方法预计提升：单线115%左右，多线150%~180%左右。
+```
+
+

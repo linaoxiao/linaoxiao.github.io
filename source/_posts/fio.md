@@ -16,6 +16,7 @@ categories:
 # sudo ./configure
 # sudo make && make install
 4、执行以下命令，清除缓存后执行测试：
+# sudo su
 # sync
 # echo 3 > /proc/sys/vm/drop_caches
 #fio -filename=/fio_test -ioengine=libaio -bs=4K -direct=1 -size=1024M -iodepth 32 -thread -rw=write -runtime=600 -numjobs=$CPUN -group_reporting -name=**.result >> **.result -runtime=600
@@ -38,4 +39,14 @@ dd if=/dev/zero of=/root/iot bs=1M count=20000 oflag=direct
 #### 目前不是稳定盘的机器
 ```
 联想昭阳N4620Z、曙光W330-H35A1、浪潮英政CP300L、
+```
+
+### 一些优化
+#### 修改预置条件
+```
+1、准备fio-3.20测试工具包。
+2、二选一：将调度器bfq的空闲时间设为0，或者切换调度器为mq-deadline：
+（1）# echo bfq > /sys/block/sda/queue/scheduler
+# echo 0 > /sys/block/xxx/queue/iosched/slice_idle
+（2）# echo mq-deadline > /sys/block/sda/queue/scheduler
 ```

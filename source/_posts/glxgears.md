@@ -17,3 +17,6 @@ categories:
 3、执行测试： 
 # export vblank_mode=0 && timeout 55 glxgears | tee -a glxgears.txt
 ```
+
+### 一些优化
+#### 测试开始后，立马按“Ctrl+Alt+F4”打开一个终端，不要做任何其他操作
