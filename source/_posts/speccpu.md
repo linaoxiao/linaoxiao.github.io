@@ -53,3 +53,9 @@ mips平台：
 `
 /home目录改为/data
 `
+
+### 一些报错
+```
+1、安装报错：error running URI-1.35 test suite
+解决办法：将./tools/src/URI-1.35/t/heuristic.t的48、56行注释掉，使其跳过检查即可
+```
