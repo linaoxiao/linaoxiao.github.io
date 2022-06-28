@@ -34,9 +34,9 @@ categories:
 #           abortRun("\"$name\": " . $res->{'ERROR'});
 #       }
 3、修改Makefile文件，打开第47行注释，修改为：
-GRAPHIC_TESTS = defined
+GRAPHIC_TESTS = defined   //测试2D、3D才需要
 修改第50行为：
-GL_LIBS = -lGL -lXext -lX11 -lm
+GL_LIBS = -lGL -lXext -lX11 -lm   //需要系统提供x11perf命令gl_glibs库
 4、在解压后的目录中打开终端执行以下命令，编译、清除缓存然后执行测试：
 # make
 # export vblank_mode=0

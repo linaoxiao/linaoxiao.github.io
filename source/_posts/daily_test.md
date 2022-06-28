@@ -104,7 +104,7 @@ minicom配置好了，minicom还有很多妙用，执行命令sudo minicom -C fi
 ```
 #### 对于被测机
 ```
-首先终端输入sudo ls  /proc/tty/driver/
+首先终端输入sudo ls /proc/tty/driver/
 查看通过那个端口输出，一般的话ARM架构里面有ttyAMA，Mips架构和X86架构里面只有serial。因此默认Arm架构为ttyAMA0输出。Mips和X86架构为ttyS0。
 （具体看文档 https://docs.qq.com/doc/DTUJhYXJldmJJRFB6）
 ```

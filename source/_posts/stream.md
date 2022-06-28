@@ -24,7 +24,7 @@ categories:
 
 #### 开透明大页的影响
 ```
-修改透明大页配置 TRANSPARENT_HUGEPAGE_ALWAYS=y，stream单项会有提升，但是stream满线会下降，只能二选一，只要不必UOS低就行。
+修改透明大页配置 TRANSPARENT_HUGEPAGE_ALWAYS=y，stream单项会有提升，但是stream满线会下降，只能二选一，只要不比UOS低就行。
 需要多次测试取区间作对比。
 ```
 

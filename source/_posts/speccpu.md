@@ -12,8 +12,8 @@ categories:
 2.解压缩speccpu2006测试工具包，并附执行权限
 # tar xvf speccpu2006-v1.0.1-newest.tar -C /home
 # chmod -R a+x /home/speccpu2006-v1.0.1
-3.修改./tools/src/make-3.80/glob/glob.c文件54行”==”为“>=”
-4.在./tools/src/buildtools文件312行上一行添加“export PERLFLAGS="-A libs=-lm -A libs=-ldl"”
+3.修改./tools/src/make-3.80/glob/glob.c文件54行”==”为“>=”   //make版本太高的话，不改可能会报错
+4.在./tools/src/buildtools文件312行上一行添加“export PERLFLAGS="-A libs=-lm -A libs=-ldl"”  //防止编译perl测试程序时，连接数学库错误
 5.安装speccpu2006：
 arm和x86架构执行：
 # ./install.sh    //在弹出的提示信息中，选择yes回车
