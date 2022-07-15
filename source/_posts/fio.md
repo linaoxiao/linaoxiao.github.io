@@ -50,5 +50,5 @@ dd if=/dev/zero of=/root/iot bs=1M count=20000 oflag=direct
 # echo bfq > /sys/block/sda/queue/scheduler
 # echo 0 > /sys/block/xxx/queue/iosched/slice_idle
 （2）
-# echo mq-deadline > /sys/block/sda/queue/scheduler
+# echo mq-deadline > /sys/block/sd*/queue/scheduler
 ```
